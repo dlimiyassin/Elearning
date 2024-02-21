@@ -1,0 +1,104 @@
+<body>
+    <header class="bg">
+        <div class="overlay">
+            <nav class="navbar navbar-light navbar-expand-lg">
+                <div class="container">
+                    <a class="title me-5" routerLink="/">E-Learning</a>
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav">
+                            <li><a class="nav-titles nav-link me-5" routerLink="/">Home</a></li>
+                            <li><a class="nav-titles nav-link me-5" routerLink="/about">About</a></li>
+                            <li><a class="nav-titles nav-link me-5" routerLink="/contact">Contact</a></li>
+                            <li><a class="nav-titles nav-link me-5" routerLink="/sign-in">Sign in</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-lg-8 mx-auto position-relative">
+                        <div class="site-heading">
+                            <h1>Contact us</h1>
+                            <span class="subheading mt-4">if you have any question reach us out</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <p>Want to get in touch? Fill out the form below to send us a message and we will respond as soon as
+                    possible!</p>
+                <form [formGroup]="complainForm" (ngSubmit)="complain()">
+                    @if (complainForm.get('name')?.invalid && complainForm.get('name')?.touched ||
+                    complainForm.get('name')?.dirty) {
+                    @if (complainForm.get('name')?.getError('required')) {
+                    <div class="text-danger small fw-bold">This field is required</div>
+                    }
+                    }
+                    <div class="control-group">
+                        <div class="form-floating controls mb-3"><input class="form-control" type="text" name="name"
+                                formControlName="name" required placeholder="Name"><label class="form-label"
+                                for="name">nom</label></div>
+                    </div>
+                    @if (complainForm.get('email')?.invalid && complainForm.get('email')?.touched ||
+                    complainForm.get('email')?.dirty) {
+                    @if (complainForm.get('email')?.getError('required')) {
+                    <div class="text-danger small fw-bold">This field is required</div>
+                    }
+                    }
+                    <div class="control-group">
+                        <div class="form-floating controls mb-3"><input class="form-control" type="email" name="email"
+                                formControlName="email" required="" placeholder="Email Address"><label
+                                class="form-label">Email
+                                Address</label></div>
+                    </div>
+                    @if (complainForm.get('number')?.invalid && complainForm.get('number')?.touched ||
+                    complainForm.get('number')?.dirty) {
+                    @if (complainForm.get('number')?.getError('required')) {
+                    <div class="text-danger small fw-bold">This field is required</div>
+                    }
+                    }
+                    <div class="control-group">
+                        <div class="form-floating controls mb-3"><input class="form-control" type="tel" name="number"
+                                formControlName="number" required="" placeholder="Phone Number"><label
+                                class="form-label">Numéro de
+                                téléphone&nbsp;</label></div>
+                    </div>
+                    @if (complainForm.get('message')?.invalid && complainForm.get('message')?.touched ||
+                    complainForm.get('message')?.dirty) {
+                    @if (complainForm.get('message')?.getError('required')) {
+                    <div class="text-danger small fw-bold">This field is required</div>
+                    }
+                    }
+                    <div class="control-group">
+                        <div class="form-floating controls mb-3"><textarea class="form-control" name="message"
+                                formControlName="message" required="" placeholder="Message"
+                                style="height: 150px;"></textarea><label class="form-label">Message</label></div>
+                    </div>
+                    <div id="success"></div>
+                    <div class="mb-3"><button class="btn btn-color" type="submit" [disabled]="!complainForm.valid">ENVOYER</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <footer class="my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-8 mx-auto">
+                    <ul class="list-inline text-center justify-content-between">
+                        <li class="list-inline-item"><i class="bi bi-facebook" style="font-size: 44px;"></i></li>
+                        <li class="list-inline-item"><i class="bi bi-twitter-x" style="font-size: 44px;"></i></li>
+                        <li class="list-inline-item"><i class="bi bi-github" style="font-size: 44px;"></i></li>
+                    </ul>
+                </div>
+                <div class="text-muted copyright text-center">Copyright&nbsp;© E--Learning 2024</div>
+            </div>
+        </div>
+    </footer>
+</body>

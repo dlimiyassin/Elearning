@@ -1,0 +1,27 @@
+.bg {
+    background-image: url('../../assets/imgs/bg.jpg');
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    position: relative;
+}
+
+.ftco-section {
+    top: 17vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.chafaf {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+input::placeholder {
+    color: #ffffff;
+}
+input {
+    border: none;
+}
+.small {
+    font-size: x-small;
+}
