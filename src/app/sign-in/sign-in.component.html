@@ -1,48 +1,68 @@
 <div class="bg ">
 
-        <div class="container">
-            <div class="card mx-auto ftco-section pb-4" style="width: 45rem; height: 55vh;">
+    <div class="container">
+        <div class="card mx-auto ftco-section pb-4" style="width: 45rem; height: 55vh;">
 
-                <div class="row justify-content-center">
-                    <div class="col-6 text-center ">
-                        <h2 class="text-light h4 mt-2">Sign In</h2>
-                    </div>
+            <div class="row justify-content-center">
+                <div class="col-6 text-center ">
+                    <h2 class="text-light h4 mt-2">Sign In</h2>
                 </div>
+            </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-md-7 col-sm-4">
-                        <div class="login-wrap">
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-sm-4">
+                    <div class="login-wrap">
 
-                            <form action="home.html" class="signin-form">
-                                <div class="form-group my-3">
-                                    <input type="text" class="form-control chafaf text-light rounded-5" placeholder="Username" >
+                        <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+                            <div class="form-group my-3">
+                                <input type="text" class="form-control chafaf text-light rounded-5"
+                                    placeholder="Username" formControlName="username" name="username">
+                                @if (signInForm.get('username')?.invalid && signInForm.get('username')?.touched ||
+                                signInForm.get('username')?.dirty
+                                ) {
+                                @if (signInForm.get('username')?.getError('required')) {
+                                <div class="text-light small fw-bold ms-2 mt-1">username is required</div>
+                                }
+                                @if (signInForm.get('username')?.getError('email')) {
+                                <div class="text-light small fw-bold ms-2 mt-1">Invalid email</div>
+                                }
+                                }
+                            </div>
+
+                            <div class="form-group my-3 ">
+                                <input type="password" class="form-control chafaf text-light rounded-5"
+                                    placeholder="Password" formControlName="password" name="password">
+                                @if (signInForm.get('password')?.invalid && signInForm.get('password')?.dirty ||
+                                signInForm.get('password')?.touched) {
+                                @if (signInForm.get('password')?.getError('required')) {
+                                <div class="text-light small fw-bold ms-2 mt-1">Password is required</div>
+                                }
+                                @if (signInForm.get('password')?.getError('minlength')) {
+                                <div class="text-light small fw-bold ms-2 mt-1">4 caracters at least</div>
+                                }
+                                }
+                            </div>
+                            <div class="form-group my-3">
+                                <button type="submit" class="form-control btn submit px-3 rounded-5"
+                                    [disabled]="!signInForm.valid" style="background-color: rgb(255, 210, 195);">Sign
+                                    In</button>
+                            </div>
+
+                            <div class="form-group d-flex justify-content-between">
+                                <div class="w-50 me-5">
+                                    <label class="checkbox-wrap small" style="color: rgb(255, 210, 195);">Remember Me
+                                        <input type="checkbox">
+                                    </label>
                                 </div>
 
-                                <div class="form-group my-3 ">
-                                    <input type="password" class="form-control chafaf text-light rounded-5" placeholder="Password">
-                                    
+                                <div class="w-50 small ms-5 mt-2">
+                                    <a href="#" style="color: #fff" class="nav-link">Forgot Password</a>
                                 </div>
-
-                                <div class="form-group my-3">
-                                    <button type="submit" class="form-control btn submit px-3 rounded-5" style="background-color: rgb(255, 210, 195);">Sign
-                                        In</button>
-                                </div>
-
-                                <div class="form-group d-flex justify-content-between">
-                                    <div class="w-50 me-5">
-                                        <label class="checkbox-wrap small" style="color: rgb(255, 210, 195);">Remember Me
-                                            <input type="checkbox">
-                                        </label>
-                                    </div>
-
-                                    <div class="w-50 small ms-5 mt-2">
-                                        <a href="#" style="color: #fff" class="nav-link">Forgot Password</a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
