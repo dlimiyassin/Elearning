@@ -1,6 +1,6 @@
 package com.example.elearning.auth;
 
-import com.example.elearning.security.JwtService;
+import com.example.elearning.config.JwtService;
 import com.example.elearning.Repositories.UserRepository;
 import com.example.elearning.exceptions.UnauthorizedException;
 import lombok.RequiredArgsConstructor;

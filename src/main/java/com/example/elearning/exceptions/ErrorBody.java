@@ -12,6 +12,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class ErrorBody {
     public String status;
-    public Date time;
+    public String time;
     public String message;
 }

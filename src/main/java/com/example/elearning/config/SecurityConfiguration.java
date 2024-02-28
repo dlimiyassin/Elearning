@@ -1,4 +1,4 @@
-package com.example.elearning.security;
+package com.example.elearning.config;
 
 
 import lombok.RequiredArgsConstructor;
@@ -28,8 +28,7 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**")
-                .permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .anyRequest()
                 .authenticated()

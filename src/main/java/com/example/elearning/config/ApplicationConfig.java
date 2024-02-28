@@ -1,4 +1,4 @@
-package com.example.elearning.security;
+package com.example.elearning.config;
 
 import com.example.elearning.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;

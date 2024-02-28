@@ -8,7 +8,6 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.Date;
 
@@ -22,7 +21,7 @@ public class CustomExceptionHandler {
         String status = "Unauthorized";
         Date time = new Date();
         String message = ex.getMessage();
-        ErrorBody errorBody = new ErrorBody(status,time,message);
+        ErrorBody errorBody = new ErrorBody(status, time.toString(),message);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorBody);
     }
 
@@ -33,7 +32,7 @@ public class CustomExceptionHandler {
         String status = "Access denied";
         Date time = new Date();
         String message = ex.getMessage();
-        ErrorBody errorBody = new ErrorBody(status,time,message);
+        ErrorBody errorBody = new ErrorBody(status,time.toString(),message);
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorBody);
     }
 
@@ -44,8 +43,18 @@ public class CustomExceptionHandler {
         String status = "UsernameNotFound";
         Date time = new Date();
         String message = ex.getMessage();
-        ErrorBody errorBody = new ErrorBody(status,time,message);
+        ErrorBody errorBody = new ErrorBody(status,time.toString(),message);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+    }
+    /* 302 */
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ResponseBody
+    public ResponseEntity<ErrorBody> handleUsernameFoundException(UserAlreadyExistsException ex) {
+        String status = "UsernameAlreadyExist";
+        Date time = new Date();
+        String message = ex.getMessage();
+        ErrorBody errorBody = new ErrorBody(status,time.toString(),message);
+        return ResponseEntity.status(HttpStatus.FOUND).body(errorBody);
     }
 
     /* 405 - Method Not Supported */
@@ -55,7 +64,7 @@ public class CustomExceptionHandler {
         String status = "Method Not Supported";
         Date time = new Date();
         String message = ex.getMessage();
-        ErrorBody errorBody = new ErrorBody(status, time, message);
+        ErrorBody errorBody = new ErrorBody(status, time.toString(), message);
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(errorBody);
     }
 
@@ -66,7 +75,7 @@ public class CustomExceptionHandler {
         String status = "Internal server error";
         Date time = new Date();
         String message = ex.getMessage();
-        ErrorBody errorBody = new ErrorBody(status,time,message);
+        ErrorBody errorBody = new ErrorBody(status,time.toString(),message);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
     }
 
@@ -77,7 +86,7 @@ public class CustomExceptionHandler {
         String status = "Not Found";
         Date time = new Date();
         String message = "The requested resource was not found on this server";
-        ErrorBody errorBody = new ErrorBody(status, time, message);
+        ErrorBody errorBody = new ErrorBody(status, time.toString(), message);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
     }
      */

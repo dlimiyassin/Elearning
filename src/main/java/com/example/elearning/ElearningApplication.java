@@ -6,8 +6,6 @@ import com.example.elearning.entities.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
@@ -16,7 +14,7 @@ public class ElearningApplication implements CommandLineRunner {
 		SpringApplication.run(ElearningApplication.class, args);
 	}
 
-	/* setup account for admin */
+	/*                       setup account for admin                  */
 	public ElearningApplication(UserRepository repository,PasswordEncoder passwordEncoder) {
 		this.repository = repository;
 		this.passwordEncoder = passwordEncoder;
