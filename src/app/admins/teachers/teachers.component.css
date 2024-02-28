@@ -13,3 +13,15 @@ td {
 table {
     margin-top: 4vw;
 }
+
+.bi-person-dash-fill {
+    color: red;
+}
+
+.bi-pencil-square {
+    color: green;
+}
+
+.custom-toast {
+    width: 208px;
+}

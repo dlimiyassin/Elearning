@@ -1,3 +1,132 @@
+<nav class="nav">
+        <div class="mx-auto fw-bolder py-2">Student's Administarion</div>
+</nav>
+<div class="container-fluid px-5">
+        <div>
+                <button class="btn btn-sm btn-secondary mt-5 mb-1 fw-bold" (click)="openLg(addStudent)">Add
+                        Student</button>
+                <table class="table table-striped table-bordered table-hover table-responsive mt-1">
+                        <thead>
+                                <tr>
+                                        <th>Id</th>
+                                        <th>Firstname</th>
+                                        <th>Lastname</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th></th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                @for (student of students; track $index) {
+                                <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{student.firstname}}</td>
+                                        <td>{{student.lastname}}</td>
+                                        <td>{{student.email}}</td>
+                                        <td>{{student.phone}}</td>
+                                        <td class="text-center">    
+                                                <button class="btn btn-sm m-0 p-0"><i class="bi bi-pencil-square me-2" (click)="openLg(editStudents,student.email)"></i></button>
+                                                <button class="btn btn-sm m-0 p-0"><i class="bi bi-person-dash-fill ms-2" (click)="deleteStudent(student.email)"></i></button>
+                                        </td>
+                                </tr>
+                                }
+                        </tbody>
+                </table>
+        </div>
+</div>
 
-        <p>students works!</p>
 
+<!-- Add student modal -->
+
+<ng-template #addStudent let-modal>
+        <div class="modal-header">
+                <h4 class="h5 fw-bold">Add New student</h4>
+                <button type="button" class="btn-close" aria-label="Close"
+                        (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <form [formGroup]="studentForm" (ngSubmit)="addNewStudent()">
+                <div class="modal-body">
+                        <div class="row justify-content-between my-2">
+                                <label for="email" class="col-form-label col-2">email</label>
+                                <div class="col-8">
+                                        <input type="text" name="email" formControlName="email" class="form-control">
+                                </div>
+                        </div>
+                        <div class="row justify-content-between my-2">
+                                <label for="firstname" class="col-form-label col-2">firstname</label>
+                                <div class="col-8">
+                                        <input type="text" name="firstname" formControlName="firstname"
+                                                class="form-control">
+                                </div>
+                        </div>
+                        <div class="row justify-content-between my-2">
+                                <label for="lastname" class="col-form-label col-2">lastname</label>
+                                <div class="col-8">
+                                        <input type="text" name="lastname" formControlName="lastname"
+                                                class="form-control">
+                                </div>
+                        </div>
+                        <div class="row justify-content-between my-2">
+                                <label for="phone" class="col-form-label col-2">phone</label>
+                                <div class="col-8">
+                                        <input type="text" name="phone" formControlName="phone" class="form-control">
+                                </div>
+                        </div>
+                        <div class="row justify-content-between my-2">
+                                <label for="password" class="col-form-label col-2">password</label>
+                                <div class="col-8">
+                                        <input type="text" name="password" formControlName="password"
+                                                class="form-control">
+                                </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                (click)="modal.close('Close click')">Close</button>
+                        <button class="btn btn-primary" type="submit" [disabled]="!studentForm.valid">Create</button>
+                </div>
+        </form>
+</ng-template>
+
+<ng-template #editStudents let-modal>
+        <div class="modal-header">
+                <h4 class="h5 fw-bold">Add New student</h4>
+                <button type="button" class="btn-close" aria-label="Close"
+                        (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <form [formGroup]="editStudentForm" (ngSubmit)="editStudent()">
+                <div class="modal-body">
+                        <div class="row justify-content-between my-2">
+                                <label for="email" class="col-form-label col-2">email</label>
+                                <div class="col-8">
+                                        <input type="text" name="email" formControlName="email" class="form-control" [readOnly]=true>
+                                </div>
+                        </div>
+                        <div class="row justify-content-between my-2">
+                                <label for="firstname" class="col-form-label col-2">firstname</label>
+                                <div class="col-8">
+                                        <input type="text" name="firstname" formControlName="firstname"
+                                                class="form-control">
+                                </div>
+                        </div>
+                        <div class="row justify-content-between my-2">
+                                <label for="lastname" class="col-form-label col-2">lastname</label>
+                                <div class="col-8">
+                                        <input type="text" name="lastname" formControlName="lastname"
+                                                class="form-control">
+                                </div>
+                        </div>
+                        <div class="row justify-content-between my-2">
+                                <label for="phone" class="col-form-label col-2">phone</label>
+                                <div class="col-8">
+                                        <input type="text" name="phone" formControlName="phone" class="form-control">
+                                </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                (click)="modal.close('Close click')">Close</button>
+                        <button class="btn btn-primary" type="submit" [disabled]="!editStudentForm.valid">Create</button>
+                </div>
+        </form>
+</ng-template>

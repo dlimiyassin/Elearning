@@ -1,0 +1,24 @@
+th {
+    font-size: small;
+}
+
+td {
+    font-size: small;
+}
+
+.nav {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0.043rem 0 0.5rem 0 #8690a3;
+    padding: fixed;
+}
+
+table {
+    margin-top: 4vw;
+}
+
+.bi-person-dash-fill {
+    color: red;
+}
+.bi-pencil-square{
+    color: green;
+}
