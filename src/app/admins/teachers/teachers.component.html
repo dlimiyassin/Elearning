@@ -1,0 +1,48 @@
+<nav class="nav">
+        <div class="mx-auto fw-bolder py-2">Teacher's Administarion</div>
+</nav>
+<div class="container-fluid">
+<div>
+        <button class="btn btn-sm btn-secondary mt-5 mb-1 fw-bold" ((click)="openLg(addTeacher)">Add Teacher</button>
+        <table class="table table-striped table-bordered table-hover table-responsive mt-1">
+               <thead>
+                       <tr>
+                               <th>Id</th>
+                               <th>Firstname</th>
+                               <th>Lastname</th>
+                               <th>Email</th>
+                               <th>Course</th>
+                       </tr>
+               </thead>
+               <tbody>
+                       <tr>
+                               @for (teacher of teachers; track $index) {
+                               <td>{{ $index + 1 }}</td>
+                               <td>{{teacher.firstname}}</td>
+                               <td>{{teacher.lastname}}</td>
+                               <td>{{teacher.email}}</td>
+                               <td>{{teacher.phone}}</td>          
+                               }
+       
+                       </tr>
+               </tbody>
+       </table>       
+</div>
+</div>
+
+
+<!-- Add teacher modal -->
+
+<ng-template #addTeacher let-modal>
+        <div class="modal-header">
+                <h4 class="modal-title">Modal title</h4>
+                <button type="button" class="btn-close" aria-label="Close"
+                        (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+                <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+        </div>
+</ng-template>

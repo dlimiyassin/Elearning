@@ -4,6 +4,7 @@ import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../services/auth.service';
 import { TokenService } from '../services/token.service';
 import { ToastrService } from 'ngx-toastr';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-sign-in',
@@ -31,30 +32,40 @@ export class SignInComponent {
       email: this.signInForm.get('username')?.value as string,
       password: this.signInForm.get('password')?.value as string,
     };
-    this.#auth.signIn(crediantils).subscribe({
-      next: (data) => {
-        this.#token.handleResponse(data);
-        let Role = (this.#token.getInfos() as any)?.role[0].authority;
-        switch (Role) {
-          case 'ADMIN':
-            this.#router.navigateByUrl('/admin');
-            this.#toastr.success("welcome dear admin", 'You Signed In');
-            break;
-          case 'TEACHER':
-            this.#router.navigateByUrl('/teacher');
-            this.#toastr.success('welcome dear teacher', 'You Signed In');
-            break;
-          case 'STUDENT':
-            this.#router.navigateByUrl('/student');
-            this.#toastr.success('welcome dear student', 'You Signed In');
-            break;
-          default:
-            break;
-        }
-      },
-      error: (err) => {
-        this.#toastr.warning(err.error.message, 'Warning');
-      },
-    });
+    this.#auth
+      .signIn(crediantils)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (data) => {
+          this.#token.handleResponse(data);
+          let Role = (this.#token.getInfos() as any)?.role[0].authority;
+          switch (Role) {
+            case 'ADMIN':
+              this.#router.navigateByUrl('/admin/teachers');
+              this.#toastr.success('welcome dear admin', 'You Signed In');
+              break;
+            case 'TEACHER':
+              this.#router.navigateByUrl('/teacher');
+              this.#toastr.success('welcome dear teacher', 'You Signed In');
+              break;
+            case 'STUDENT':
+              this.#router.navigateByUrl('/student');
+              this.#toastr.success('welcome dear student', 'You Signed In');
+              break;
+            default:
+              break;
+          }
+        },
+        error: (err) => {
+          this.#toastr.warning(err.error.message, 'Warning');
+        },
+      });
+  }
+
+  /****************************  unsubscribe   ************************/
+  private ngUnsubscribe = new Subject<void>();
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

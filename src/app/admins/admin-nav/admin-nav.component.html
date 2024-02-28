@@ -1,0 +1,12 @@
+<nav class="sidenav">
+    <div class="text-center mt-3">
+        <img class="rounded-circle img-thumbnail" src="../../assets/imgs/profile picture copy.jpg" alt="admin">
+    </div>
+    <div class="badge d-block text-center mt-2">Admin</div>
+    <ul class="list-group list-group-flush mt-3">
+        <button class="item list-group-item list-group-item-action border-top" routerLink="/admin/teachers">Teachers</button>
+        <button class="item list-group-item list-group-item-action" routerLink="/admin/students">Students</button>
+        <button class="item list-group-item list-group-item-action border-bottom" routerLink="/admin/courses">Courses</button>
+    </ul>
+    <button class="sign-out position-absolute bottom-0 start-50 translate-middle mb-4" (click)="signOut()"><i class="bi bi-box-arrow-left me-2"></i>Sign Out</button>
+</nav>
