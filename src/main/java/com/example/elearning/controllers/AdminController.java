@@ -25,6 +25,13 @@ public class AdminController {
 /* ******************************* Teacher CRUD ******************************** */
 
     @GetMapping
+    public ResponseEntity<UserResponse> getUser(@RequestParam("email") String email){
+        UserDto userDto = adminService.getUser(email);
+        ModelMapper modelMapper = new ModelMapper();
+        UserResponse userResponse = modelMapper.map(userDto, UserResponse.class);
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    }
+    @GetMapping("/teacher")
     public ResponseEntity<List<UserResponse>> getAllTeachers(){
         List<UserDto> userDtoList = adminService.getAllTeachers();
         List<UserResponse> userResponse = new ArrayList<>();
@@ -36,7 +43,7 @@ public class AdminController {
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/teacher")
     public ResponseEntity<UserResponse> createTeacher(@RequestBody NewUser newUser){
         UserDto userDto = adminService.createTeacher(newUser);
         ModelMapper modelMapper = new ModelMapper();
@@ -44,7 +51,7 @@ public class AdminController {
         return new ResponseEntity<>(teacher,HttpStatus.CREATED);
     }
 
-    @PutMapping
+    @PutMapping("/teacher")
     public ResponseEntity<UserResponse> updateTeacher(@RequestBody NewUser newUser){
         UserDto userDto = adminService.updateTeacher(newUser);
         ModelMapper modelMapper = new ModelMapper();
@@ -52,7 +59,7 @@ public class AdminController {
         return new ResponseEntity<>(teacher,HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/teacher")
     public ResponseEntity<Object> deleteTeacher(@RequestParam("email") String email){
         adminService.deleteTeacher(email);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

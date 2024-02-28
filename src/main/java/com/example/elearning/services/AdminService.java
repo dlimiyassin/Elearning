@@ -21,4 +21,6 @@ public interface AdminService {
     UserDto updateStudent(NewUser newUser);
 
     void deleteStudent(String email);
+
+    UserDto getUser(String email);
 }

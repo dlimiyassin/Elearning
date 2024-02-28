@@ -27,7 +27,17 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
-/* ******************************* Teacher CRUD ******************************** */
+    @Override
+    public UserDto getUser(String email) {
+        if (email.isEmpty()) throw new UsernameNotFoundException("No email provided");
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("This email: " + email + " does not exist"));
+
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(user, UserDto.class);
+    }
+
+        /* ******************************* Teacher CRUD ******************************** */
 
     @Override
     public List<UserDto> getAllTeachers() {
@@ -75,7 +85,6 @@ public class AdminServiceImpl implements AdminService {
             updatedTeacher.setFirstname(newUser.getFirstname());
             updatedTeacher.setLastname(newUser.getLastname());
             updatedTeacher.setPhone(newUser.getPhone());
-            updatedTeacher.setPassword(passwordEncoder.encode(newUser.getPassword()));
             User user = userRepository.save(updatedTeacher);
             ModelMapper modelMapper = new ModelMapper();
             return modelMapper.map(user, UserDto.class);
@@ -149,7 +158,6 @@ public class AdminServiceImpl implements AdminService {
             updatedStudent.setFirstname(newUser.getFirstname());
             updatedStudent.setLastname(newUser.getLastname());
             updatedStudent.setPhone(newUser.getPhone());
-            updatedStudent.setPassword(passwordEncoder.encode(newUser.getPassword()));
             User user = userRepository.save(updatedStudent);
             ModelMapper modelMapper = new ModelMapper();
             return modelMapper.map(user, UserDto.class);
