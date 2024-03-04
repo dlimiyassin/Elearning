@@ -65,4 +65,25 @@ export class AdminService {
     const url = this.Api + `/admin/student?email=${email}`;
     return this.http.delete<Object>(url);
   }
+
+  /********************************* courses ******************************/
+
+  /********* GET **********/
+  public getCourses(): Observable<[]> {
+    return this.http.get<[]>(this.Api + '/admin/course');
+  }
+  /********* POST **********/
+  public addCourse<T>(course: T): Observable<T> {
+    return this.http.post<T>(this.Api + '/admin/course', course);
+  }
+  /********* DELETED **********/
+  public deleteCourse(title: string): Observable<Object> {
+    const url = this.Api + `/admin/course?title=${title}`;
+    return this.http.delete<Object>(url);
+  }
+  /********* PUT **********/
+  public editCourse<T>(course: T, oldTitle : string): Observable<T> {
+    const url = this.Api + `/admin/course?title=${oldTitle}`;
+    return this.http.put<T>(url, course);
+  }
 }

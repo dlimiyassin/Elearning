@@ -1,2 +1,193 @@
+<nav class="nav">
+        <div class="mx-auto fw-bolder py-2">Courses's Administarion</div>
+</nav>
+<div class="container-fluid px-5">
+<button class="btn btn-sm btn-secondary mt-5 mb-3 fw-bold" (click)="openLg(addCours)">Add Course</button>
+<div class="d-grid">
+        <div ngbAccordion [closeOthers]="true">
+        @for (course of courses; track $index) {
+        
+                <div ngbAccordionItem class="m-1 shadow-sm">
+                <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
+                        <p class="my-0 py-3 w-100" ngbAccordionToggle>{{course.title}}</p>
+                        <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-sm" (click)="openLg(editCours,course.title)">
+                                        <i class="bi bi-pencil-square me-2"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm mx-auto me-2"
+                                        (click)="deleteCourse(course.title)"><i class="bi bi-person-dash-fill ms-2"></i>
+                                </button>
+                        </div>
+                </div>
+                <div ngbAccordionCollapse>
+                <div ngbAccordionBody>
+                        <ng-template >
+                        <div ngbAccordion [closeOthers]="true">
+                                <div ngbAccordionItem class="m-1 shadow-sm">
+                                        <h2 ngbAccordionHeader>
+                                                <button class="fw-bolder" style="font-weight: 500;" ngbAccordionButton>Teachers</button>
+                                        </h2>
+                                        <div ngbAccordionCollapse>
+                                                <div ngbAccordionBody>
+                                                        <ng-template class="table-responsive-md">
 
-        <p>courses works!</p>
+                                                        <table class="table table-striped table-bordered table-hover table-responsive mt-1">
+                                                                <thead>
+                                                                        <tr>
+                                                                                <th>Id</th>
+                                                                                <th>Firstname</th>
+                                                                                <th>Lastname</th>
+                                                                                <th>Email</th>
+                                                                                <th>Phone</th>
+                                                                                <th></th>
+                                                                        </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        @for (teacher of teachers; track $index) {
+                                                                        <tr>
+                                                                                <td>{{ $index + 1 }}</td>
+                                                                                <td>{{teacher.firstname}}</td>
+                                                                                <td>{{teacher.lastname}}</td>
+                                                                                <td>{{teacher.email}}</td>
+                                                                                <td>{{teacher.phone}}</td>
+                                                                                <td class="text-center">
+                                                                                        <label class="switch">
+                                                                                        <input checked="" type="checkbox">
+                                                                                        <div class="slider">
+                                                                                            <div class="circle">
+                                                                                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <g>
+                                                                                                        <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path>
+                                                                                                    </g>
+                                                                                                </svg>
+                                                                                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <g>
+                                                                                                        <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path>
+                                                                                                    </g>
+                                                                                                </svg>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        </label>
+                                                                                </td>
+                                                                        </tr>
+                                                                        }
+                                                                </tbody>
+                                                        </table>
+                                                        </ng-template>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div ngbAccordionItem class="m-1 shadow-sm">
+                                        <h2 ngbAccordionHeader>
+                                                <button class="fw-bolder" style="font-weight: 500;" ngbAccordionButton>Students</button>
+                                        </h2>
+                                        <div ngbAccordionCollapse>
+                                                <div ngbAccordionBody>
+                                                        <ng-template class="table-responsive-md">
+                                                        <table class="table table-striped table-bordered table-hover table-responsive mt-1">
+                                                                <thead>
+                                                                        <tr>
+                                                                                <th>Id</th>
+                                                                                <th>Firstname</th>
+                                                                                <th>Lastname</th>
+                                                                                <th>Email</th>
+                                                                                <th>Phone</th>
+                                                                                <th></th>
+                                                                        </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        @for (student of students; track $index) {
+                                                                        <tr>
+                                                                                <td>{{ $index + 1 }}</td>
+                                                                                <td>{{student.firstname}}</td>
+                                                                                <td>{{student.lastname}}</td>
+                                                                                <td>{{student.email}}</td>
+                                                                                <td>{{student.phone}}</td>
+                                                                                <td class="text-center">
+                                                                                        <label class="switch">
+                                                                                        <input checked="" type="checkbox">
+                                                                                        <div class="slider">
+                                                                                            <div class="circle">
+                                                                                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <g>
+                                                                                                        <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path>
+                                                                                                    </g>
+                                                                                                </svg>
+                                                                                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <g>
+                                                                                                        <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path>
+                                                                                                    </g>
+                                                                                                </svg>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        </label>
+                                                                                </td>
+                                                                        </tr>
+                                                                        }
+                                                                </tbody>
+                                                        </table>
+                                                        </ng-template>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </ng-template>
+
+                </div>
+                </div>
+                </div>
+        }
+        </div>
+        </div>
+</div>
+
+
+
+<ng-template #addCours let-modal>
+        <div class="modal-header">
+                <h4 class="h5 fw-bold">Add New Course</h4>
+                <button type="button" class="btn-close" aria-label="Close"
+                        (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <form  (ngSubmit)="addCourse()">
+                <div class="modal-body">
+                        <div class="row justify-content-between my-2">
+                                <label for="email" class="col-form-label col-2 ps-5 fw-normal">title</label>
+                                <div class="col-8">
+                                        <input type="text" name="title" [(ngModel)]="title" class="form-control">
+                                </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                (click)="modal.close('Close click')">Close</button>
+                        <button class="btn btn-primary" type="submit" value="Submit">Create</button>
+                </div>
+        </form>
+</ng-template>
+
+
+<ng-template #editCours let-modal>
+        <div class="modal-header">
+                <h4 class="h5 fw-bold">Add New Course</h4>
+                <button type="button" class="btn-close" aria-label="Close"
+                        (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <form (ngSubmit)="editCourse()">
+                <div class="modal-body">
+                        <div class="row justify-content-between my-2">
+                                <label for="email" class="col-form-label col-2 ps-5 fw-normal">title</label>
+                                <div class="col-8">
+                                        <input type="text" name="newTitle" [(ngModel)]="newTitle" class="form-control">
+                                </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                (click)="modal.close('Close click')">Close</button>
+                        <button class="btn btn-primary" type="submit" value="Submit">Create</button>
+                </div>
+        </form>
+</ng-template>
+        
