@@ -27,5 +27,5 @@ public class UserDto implements Serializable {
     private String phone;
     private String picture;
     private Role role;
-    private List<CourseUser> courses;
+    //private List<CourseUser> courses;
 }

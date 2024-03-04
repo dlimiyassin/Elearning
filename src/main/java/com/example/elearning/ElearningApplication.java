@@ -33,6 +33,5 @@ public class ElearningApplication implements CommandLineRunner {
 					.build();
 			repository.save(user);
 		}
-
 	}
 }
