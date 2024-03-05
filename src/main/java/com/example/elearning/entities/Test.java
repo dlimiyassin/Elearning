@@ -32,5 +32,5 @@ public class Test {
     private int level;
     @ManyToOne
     @JoinColumn(name = "course_id")
-    private Course course_id;
+    private Course course;
 }

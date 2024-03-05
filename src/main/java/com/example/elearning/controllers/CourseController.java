@@ -45,8 +45,8 @@ public class CourseController {
     }
 
     @GetMapping("/setting")
-    public ResponseEntity<Object> setCourseToUser(@RequestParam("email") String email, @RequestParam("title") String title){
-        courseService.setCourseToUser(email,title);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Boolean> setCourseToUser(@RequestParam("email") String email, @RequestParam("title") String title){
+        Boolean rep = courseService.setCourseToUser(email,title);
+        return new ResponseEntity<>(rep,HttpStatus.OK);
     }
 }

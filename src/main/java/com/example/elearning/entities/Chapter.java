@@ -23,6 +23,6 @@ public class Chapter {
     private int level;
     @ManyToOne
     @JoinColumn(name = "course_id")
-    private Course course_id;
+    private Course course;
 
 }

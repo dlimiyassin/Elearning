@@ -25,12 +25,13 @@ public class Course {
     @Column
     private String title;
 
-    @OneToMany(mappedBy = "course_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Chapter> chapters;
 
-    @OneToMany(mappedBy = "course_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Test> tests;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CourseUser> users;
+
 }

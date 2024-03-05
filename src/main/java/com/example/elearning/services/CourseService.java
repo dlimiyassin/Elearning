@@ -13,5 +13,5 @@ public interface CourseService {
 
     Course editCourse(Course course, String title);
 
-    void setCourseToUser(String email, String title);
+    Boolean setCourseToUser(String email, String title);
 }
