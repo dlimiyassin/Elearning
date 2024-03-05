@@ -7,11 +7,13 @@ import { AdminService } from '../../services/admin.service';
 import { Student } from '../../models/student';
 import { FormsModule, NgModel } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Course } from '../../models/course';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [AdminNavComponent, NgbModule, FormsModule],
+  imports: [AdminNavComponent, NgbModule, FormsModule, NgClass],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css',
 })
@@ -21,6 +23,30 @@ export class CoursesComponent {
   students: Student[] = [];
   courses: Course[] = [];
   items = ['Teachers', 'Students'];
+
+  getSwitchClasses(teacherId: number, users: Teacher[]): boolean {
+    for (const user of users) {
+      if (user.id == teacherId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isToggled: boolean = true;
+  toggleSwitch(title: string, email: string) {
+    this.#adminService
+      .setCourseUser(email, title)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: () => {
+          this.getCourses();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
 
   ngOnInit(): void {
     this.#adminService.teachers$
@@ -83,9 +109,9 @@ export class CoursesComponent {
   /******************************  Create course  ***************************/
   #modalService = inject(NgbModal);
   #toast = inject(ToastrService);
-  openLg(content: TemplateRef<any>, title? : string) {
+  openLg(content: TemplateRef<any>, title?: string) {
     this.#modalService.open(content);
-    if(title) this.oldTitle=title;
+    if (title) this.oldTitle = title;
   }
   title = '';
   addCourse() {
@@ -98,7 +124,7 @@ export class CoursesComponent {
       .subscribe({
         next: () => {
           this.getCourses();
-          this.title='';
+          this.title = '';
           this.#modalService.dismissAll();
           this.#toast.success('Course added seccussfully', 'New Record');
         },
@@ -109,18 +135,18 @@ export class CoursesComponent {
   }
   /******************************  edit course  ***************************/
   oldTitle = '';
-  newTitle='';
+  newTitle = '';
   editCourse() {
     const course = {
-      title : this.newTitle
+      title: this.newTitle,
     };
     this.#adminService
-      .editCourse(course,this.oldTitle)
+      .editCourse(course, this.oldTitle)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: () => {
           this.getCourses();
-          this.newTitle=''
+          this.newTitle = '';
           this.#modalService.dismissAll();
           this.#toast.success('Course edited seccussfully', 'Record Edited');
         },
@@ -156,9 +182,4 @@ export class CoursesComponent {
 
 /******************************  Course class  ***************************/
 
-class Course {
-  title: string;
-  constructor(title: string) {
-    this.title = title;
-  }
-}
+
