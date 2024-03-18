@@ -5,9 +5,10 @@ export class Course {
   id: number;
   title: string;
   users: Teacher[] = [];
-
-  constructor(id: number, title: string ) {
+  chapters: Chapter[] = [];
+  constructor(id: number, title: string, chapters : Chapter[]) {
     this.id = id;
     this.title = title;
+    this.chapters = chapters;
   }
 }
