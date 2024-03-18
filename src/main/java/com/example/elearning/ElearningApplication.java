@@ -23,11 +23,11 @@ public class ElearningApplication implements CommandLineRunner {
 	private final PasswordEncoder passwordEncoder;
 	@Override
 	public void run(String... args) throws Exception {
-		if (repository.findByEmail("dlimiyassine13@gmail.com").isEmpty()){
+		if (repository.findByEmail("admin@gmail.com").isEmpty()){
 			var user = User.builder()
 					.firstname("yassine")
 					.lastname("dlimi")
-					.email("dlimiyassine13@gmail.com")
+					.email("admin@gmail.com")
 					.password(passwordEncoder.encode("1234"))
 					.role(Role.ADMIN)
 					.build();
