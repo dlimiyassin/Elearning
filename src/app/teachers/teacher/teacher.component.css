@@ -1,0 +1,63 @@
+.sidenav {
+    background: #ffffff;
+    position: fixed;
+    width: 17vw;
+    min-height: 100vh;
+    box-shadow: 0.043rem 0 0.5rem 0 #8690a3;
+}
+
+.item {
+    background-color: #ffffff;
+    color: black;
+    font-size: small;
+    font-weight: 600;
+    padding: 15px;
+}
+
+.rounded-circle {
+    height: 20vh;
+    width: 10vw;
+}
+
+.badge {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.sign-out {
+
+    background-color: #ffffff;
+    color: black;
+    font-size: small;
+    font-weight: 600;
+    border: none;
+}
+.navv {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0.043rem 0 0.5rem 0 #8690a3;
+    padding: fixed;
+    margin-left: 17vw;
+    
+}
+
+.body {
+    margin-left: 17vw;
+}
+th {
+    font-size: small;
+}
+
+td {
+    font-size: small;
+}
+.bi-trash3 {
+    color: red;
+}
+
+.bi-pencil-square {
+    color: green;
+}
+.accordion-button {
+    background-color: azure;
+}

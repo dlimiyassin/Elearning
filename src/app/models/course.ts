@@ -1,3 +1,4 @@
+import { Chapter } from "./chapter";
 import { Teacher } from "./teacher";
 
 export class Course {
@@ -5,7 +6,7 @@ export class Course {
   title: string;
   users: Teacher[] = [];
 
-  constructor(id: number, title: string) {
+  constructor(id: number, title: string ) {
     this.id = id;
     this.title = title;
   }

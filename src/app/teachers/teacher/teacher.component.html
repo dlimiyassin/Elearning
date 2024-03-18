@@ -1,1 +1,161 @@
-<p>teacher works!</p>
+<nav class="sidenav">
+    <div class="text-center mt-3">
+        <img class="rounded-circle img-thumbnail" src="../../../assets/imgs/profile picture copy.jpg" alt="admin">
+    </div>
+    <div class="badge d-block text-center mt-2">Teacher</div>
+    <ul class="list-group list-group-flush mt-3">
+        <button class="item list-group-item list-group-item-action border">Courses</button>
+    </ul>
+    <button class="sign-out position-absolute bottom-0 start-50 translate-middle mb-4" (click)="signOut()"><i
+            class="bi bi-box-arrow-left me-2"></i>Sign Out</button>
+</nav>
+<nav class="navv">
+    <div class="text-center fw-bolder py-2">Courses's Administarion</div>
+</nav>
+<div class="body">
+    <div class="container-fluid mt-5 px-5">
+        <table class="table table-striped table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>course name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>java</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm m-0 p-0"><i class="bi bi-arrows-fullscreen me-2"
+                                style="color: orange;" (click)="openLg(editCourse)"></i></button>
+                        <button class="btn btn-sm m-0 p-0"><i class="bi bi-pencil-square mx-2"></i></button>
+                        <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2"></i></button>
+                    </td>
+                </tr>
+                <tr>
+        
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<ng-template #editCourse let-modal>
+    <div class="modal-header pb-0 pt-2">
+        <h6 class="fw-bold">Build Course</h6>
+        <button type="button" class="btn-close" style="width: 6px; height: 3px; margin-bottom: 3px;" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+        <div class="modal-body">
+            <ul class="nav nav-tabs nav-tabs-bordered">
+            
+                <li class="nav-item">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#course">Courses</button>
+                </li>
+            
+                <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#test">Tests</button>
+                </li>
+            
+            </ul>
+            <div class="tab-content pt-2">
+            <div class="tab-pane fade show active" id="course">
+            <div class="d-grid">
+                <div ngbAccordion [closeOthers]="true">
+                    <div ngbAccordionItem class="my-1 shadow-sm">
+                        <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
+                            <p class="my-0 py-3 w-100" ngbAccordionToggle>General</p>
+                        </div>
+                        <div ngbAccordionCollapse>
+                            <div ngbAccordionBody>
+                                <button class="btn btn-sm btn-info" (click)="openSm(addChapter)">add</button>
+                                <table class="table table-striped table-hover table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>title</th>
+                                        <th>lien</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>introduction</td>
+                                        <td>ssssssssssssssss</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-pencil-square mx-2"></i></button>
+                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div ngbAccordionItem class="my-1 shadow-sm">
+                        <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
+                            <p class="my-0 py-3 w-100" ngbAccordionToggle>Level 1</p>
+                        </div>
+                        <div ngbAccordionCollapse>
+                            <div ngbAccordionBody>
+                                salam
+                            </div>
+                        </div>
+                    </div>
+                    <div ngbAccordionItem class="my-1 shadow-sm">
+                        <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
+                            <p class="my-0 py-3 w-100" ngbAccordionToggle>Level 2</p>
+                        </div>
+                        <div ngbAccordionCollapse>
+                            <div ngbAccordionBody>
+                                salam
+                            </div>
+                        </div>
+                    </div>
+                    <div ngbAccordionItem class="my-1 shadow-sm">
+                        <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
+                            <p class="my-0 py-3 w-100" ngbAccordionToggle>Level 3</p>
+                        </div>
+                        <div ngbAccordionCollapse>
+                            <div ngbAccordionBody>
+                                salam
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="tab-pane fade" id="test">
+                test part
+            </div>
+            </div>
+
+
+        </div>
+        <div class="modal-footer pb-1 pt-1">
+            <button type="button" class="btn btn-sm btn-secondary rounded-3" (click)="modal.close('Close click')">Close</button>
+            <button class="btn btn-sm btn-primary rounded-3" type="submit" value="Submit">Build</button>
+        </div>
+</ng-template>
+
+
+
+<!-- add chapter -->
+<ng-template #addChapter let-modal>
+    <div class="modal-header pb-0 pt-2">
+        <h6 class="fw-bold">add course</h6>
+        <button type="button" class="btn-close" style="width: 6px; height: 3px; margin-bottom: 3px;" aria-label="Close"
+            (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+    </div>
+    <div class="modal-footer pb-1 pt-1">
+        <button type="button" class="btn btn-sm btn-secondary rounded-3"
+            (click)="modal.close('Close click')">Close</button>
+        <button class="btn btn-sm btn-primary rounded-3" type="submit" value="Submit">Add</button>
+    </div>
+</ng-template>

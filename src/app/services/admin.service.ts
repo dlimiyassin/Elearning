@@ -9,14 +9,18 @@ import { Teacher } from '../models/teacher';
   providedIn: 'root',
 })
 export class AdminService {
-  private Api = environment.apiUrl;
+  
   constructor(private http: HttpClient) {}
+  private Api = environment.apiUrl;
 
+  /********* GET USER **********/
   public getUser(email: string): Observable<Teacher> {
     const url = this.Api + `/admin?email=${email}`;
     return this.http.get<Teacher>(url);
   }
-  /********************************* teachers ******************************/
+
+  /****************************************** teachers ***************************************/
+
   /********* STORE **********/
   private teachersStore = new BehaviorSubject<[]>([]);
   teachers$ = this.teachersStore.asObservable();
@@ -40,7 +44,9 @@ export class AdminService {
     const url = this.Api + `/admin/teacher?email=${email}`;
     return this.http.delete<Object>(url);
   }
-  /********************************* students ******************************/
+
+  /****************************************** students ***************************************/
+
   /********* STORE **********/
   private studentsStore = new BehaviorSubject<Student[]>([]);
   students$ = this.studentsStore.asObservable();
@@ -66,15 +72,16 @@ export class AdminService {
     return this.http.delete<Object>(url);
   }
 
-  /********************************* courses ******************************/
+  /****************************************** courses ***************************************/
 
   /********* GET **********/
   public getCourses(): Observable<[]> {
     return this.http.get<[]>(this.Api + '/admin/course');
   }
   /********* GET **********/
-  public setCourseUser(email:string, title:string): Observable<[]> {
-    const url = this.Api + `/admin/course/setting?email=${email}&title=${title}`;
+  public setCourseUser(email: string, title: string): Observable<[]> {
+    const url =
+      this.Api + `/admin/course/setting?email=${email}&title=${title}`;
 
     return this.http.get<[]>(url);
   }
