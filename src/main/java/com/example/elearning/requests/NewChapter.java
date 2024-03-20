@@ -1,4 +1,4 @@
-package com.example.elearning.dto;
+package com.example.elearning.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ChapterDto {
-    int id;
+public class NewChapter {
     String title;
     String lien;
     int level;

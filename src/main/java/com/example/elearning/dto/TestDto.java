@@ -1,20 +1,22 @@
 package com.example.elearning.dto;
 
-import com.example.elearning.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CourseDto {
+public class TestDto {
     int id;
-    String title;
-    List<UserDto> users;
-    List<ChapterDto> chapters;
-    List<TestDto> tests;
+    String question;
+    String response_1;
+    String response_2;
+    String response_3;
+    String response_4;
+    String response_correct;
+    int level;
+    int course_id;
 }

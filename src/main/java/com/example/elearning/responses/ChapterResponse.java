@@ -1,4 +1,4 @@
-package com.example.elearning.dto;
+package com.example.elearning.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ChapterDto {
+public class ChapterResponse {
     int id;
     String title;
     String lien;
     int level;
-    int course_id;
 }

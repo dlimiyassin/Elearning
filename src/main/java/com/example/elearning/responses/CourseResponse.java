@@ -1,6 +1,7 @@
 package com.example.elearning.responses;
 
 import com.example.elearning.dto.ChapterDto;
+import com.example.elearning.dto.TestDto;
 import com.example.elearning.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import java.util.List;
 public class CourseResponse {
     int id;
     String title;
-    List<UserDto> users;
-    List<ChapterDto> chapters;
+    //List<UserDto> users;
+    List<ChapterResponse> chapters;
+    List<TestResponse> tests;
 }
