@@ -1,3 +1,6 @@
+
+<!------------------------------------------------- sidebar ---------------------------------------------->
+
 <nav class="sidenav">
     <div class="text-center mt-3">
         <img class="rounded-circle img-thumbnail" src="../../../assets/imgs/profile picture copy.jpg" alt="admin">
@@ -9,9 +12,14 @@
     <button class="sign-out position-absolute bottom-0 start-50 translate-middle mb-4" (click)="signOut()"><i
             class="bi bi-box-arrow-left me-2"></i>Sign Out</button>
 </nav>
+
+<!------------------------------------------------- header ---------------------------------------------->
+
 <nav class="navv">
     <div class="text-center fw-bolder py-2">Courses's Administarion</div>
 </nav>
+
+<!------------------------------------------------- courses ---------------------------------------------->
 <div class="body">
     <div class="container-fluid mt-5 px-5">
         <div ngbAccordion [closeOthers]="true">
@@ -20,6 +28,8 @@
                 <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
                     <p class="my-0 py-3 w-100" ngbAccordionToggle>{{ course.title }}</p>
                 </div>
+<!------------------------------------------------- accordions ---------------------------------------------->
+
                 <div ngbAccordionCollapse>
                     <div ngbAccordionBody>
                         <ng-template>
@@ -35,7 +45,8 @@
                         
                         </ul>
                         <div class="tab-content pt-2">
-                            <!-- course part -->
+<!------------------------------------------------- chapters part ---------------------------------------------->
+
                             <div class="tab-pane fade show active" id="course">
                                 <div class="d-grid">
                                     <div ngbAccordion [closeOthers]="true">
@@ -46,23 +57,23 @@
                                             <div ngbAccordionCollapse>
                                             <div ngbAccordionBody>
                                             <ng-template>
-                                            <button class="btn btn-sm btn-info" (click)="openSm(addChapter)">add</button>
+                                            <button class="btn btn-sm btn-info" (click)="openSm(addChapter,0,course.id)">add</button>
                                             <table class="table table-striped table-hover table-responsive mt-2">
-                                                @for (chapter of filterchapters(course.chapters,0); track $index) {
                                                 <thead>
                                                     <tr class="border-top">
                                                         <th>title</th>
                                                         <th>lien</th>
                                                     </tr>
                                                 </thead>
+                                                @for (chapter of filterchapters(course.chapters,0); track $index) {
                                                 <tbody>
                                                     <tr>
                                             
                                                         <td>{{ chapter?.title }}</td>
                                                         <td>{{ chapter?.lien }}</td>
                                                         <td class="text-center">
-                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-pencil-square mx-2"></i></button>
-                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0" (click)="openEditChapterModal(editChapterr,0,course.id,chapter)"><i class="bi bi-pencil-square mx-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2" (click)="deleteChapter(chapter.id)"></i></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -79,23 +90,23 @@
                                             <div ngbAccordionCollapse>
                                             <div ngbAccordionBody>
                                             <ng-template>
-                                            <button class="btn btn-sm btn-info" (click)="openSm(addChapter,1)">add</button>
+                                            <button class="btn btn-sm btn-info" (click)="openSm(addChapter,1,course.id)">add</button>
                                             <table class="table table-striped table-hover table-responsive mt-2">
-                                                @for (chapter of filterchapters(course.chapters,1); track $index) {
                                                 <thead>
                                                     <tr class="border-top">
                                                         <th>title</th>
                                                         <th>lien</th>
                                                     </tr>
                                                 </thead>
+                                                @for (chapter of filterchapters(course.chapters,1); track $index) {
                                                 <tbody>
                                                     <tr>
                                             
                                                         <td>{{ chapter?.title }}</td>
                                                         <td>{{ chapter?.lien }}</td>
                                                         <td class="text-center">
-                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-pencil-square mx-2"></i></button>
-                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0" (click)="openEditChapterModal(editChapterr,1,course.id,chapter)"><i class="bi bi-pencil-square mx-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2" (click)="deleteChapter(chapter.id)"></i></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -107,28 +118,28 @@
                                         </div>
                                         <div ngbAccordionItem class="my-1 shadow-sm">
                                             <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
-                                            <p class="my-0 py-3 w-100" ngbAccordionToggle>Level2</p>
+                                            <p class="my-0 py-3 w-100" ngbAccordionToggle>Level 2</p>
                                             </div>
                                             <div ngbAccordionCollapse>
                                             <div ngbAccordionBody>
                                             <ng-template>
-                                            <button class="btn btn-sm btn-info" (click)="openSm(addChapter,2)">add</button>
+                                            <button class="btn btn-sm btn-info" (click)="openSm(addChapter,2,course.id)">add</button>
                                             <table class="table table-striped table-hover table-responsive mt-2">
-                                                @for (chapter of filterchapters(course.chapters,2); track $index) {
                                                 <thead>
                                                     <tr class="border-top">
                                                         <th>title</th>
                                                         <th>lien</th>
                                                     </tr>
                                                 </thead>
+                                                @for (chapter of filterchapters(course.chapters,2); track $index) {
                                                 <tbody>
                                                     <tr>
                                             
                                                         <td>{{ chapter?.title }}</td>
                                                         <td>{{ chapter?.lien }}</td>
                                                         <td class="text-center">
-                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-pencil-square mx-2"></i></button>
-                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0" (click)="openEditChapterModal(editChapterr,2,course.id,chapter)"><i class="bi bi-pencil-square mx-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2" (click)="deleteChapter(chapter.id)"></i></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -145,23 +156,23 @@
                                             <div ngbAccordionCollapse>
                                             <div ngbAccordionBody>
                                             <ng-template>
-                                            <button class="btn btn-sm btn-info" (click)="openSm(addChapter,3)">add</button>
+                                            <button class="btn btn-sm btn-info" (click)="openSm(addChapter,3,course.id)">add</button>
                                             <table class="table table-striped table-hover table-responsive mt-2">
-                                                @for (chapter of filterchapters(course.chapters,3); track $index) {
                                                 <thead>
                                                     <tr class="border-top">
                                                         <th>title</th>
                                                         <th>lien</th>
                                                     </tr>
                                                 </thead>
+                                                @for (chapter of filterchapters(course.chapters,3); track $index) {
                                                 <tbody>
                                                     <tr>
                                             
                                                         <td>{{ chapter?.title }}</td>
                                                         <td>{{ chapter?.lien }}</td>
                                                         <td class="text-center">
-                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-pencil-square mx-2"></i></button>
-                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0" (click)="openEditChapterModal(editChapterr,3,course.id,chapter)"><i class="bi bi-pencil-square mx-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2" (click)="deleteChapter(chapter.id)"></i></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -174,9 +185,144 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Test part -->
+<!------------------------------------------------- Test part ---------------------------------------------->
                             <div class="tab-pane fade" id="test">
-                                test part
+                                <div class="d-grid">
+                                    <div ngbAccordion [closeOthers]="true">
+                                        <div ngbAccordionItem class="my-1 shadow-sm">
+                                            <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
+                                            <p class="my-0 py-3 w-100" ngbAccordionToggle>General</p>
+                                            </div>
+                                            <div ngbAccordionCollapse>
+                                            <div ngbAccordionBody>
+                                            <ng-template>
+                                            <button class="btn btn-sm btn-info" (click)="openSm(addtestt,0,course.id)">add</button>
+                                            <table class="table table-striped table-hover table-responsive mt-2">
+                                                <thead>
+                                                    <tr class="border-top">
+                                                        <th>question</th>
+                                                        <th>response</th>
+                                                    </tr>
+                                                </thead>
+                                                @for (test of filtertests(course.tests,0); track $index) {
+                                                <tbody>
+                                                    <tr>
+                                            
+                                                        <td>{{ test?.question }}</td>
+                                                        <td>{{ test?.response_correct }}</td>
+                                                        <td class="text-center">
+                                                            <button class="btn btn-sm m-0 p-0" (click)="openEditTestModal(edittestt,0,course.id,test)"><i class="bi bi-pencil-square mx-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2" (click)="deleteTest(test.id)"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                }
+                                            </table>
+                                            </ng-template>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div ngbAccordionItem class="my-1 shadow-sm">
+                                            <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
+                                            <p class="my-0 py-3 w-100" ngbAccordionToggle>Level 1</p>
+                                            </div>
+                                            <div ngbAccordionCollapse>
+                                            <div ngbAccordionBody>
+                                            <ng-template>
+                                            <button class="btn btn-sm btn-info" (click)="openSm(addtestt,1,course.id)">add</button>
+                                            <table class="table table-striped table-hover table-responsive mt-2">
+                                                <thead>
+                                                    <tr class="border-top">
+                                                        <th>question</th>
+                                                        <th>response</th>
+                                                    </tr>
+                                                </thead>
+                                                @for (test of filtertests(course.tests,1); track $index) {
+                                                <tbody>
+                                                    <tr>
+                                            
+                                                        <td>{{ test?.question }}</td>
+                                                        <td>{{ test?.response_correct }}</td>
+                                                        <td class="text-center">
+                                                            <button class="btn btn-sm m-0 p-0" (click)="openEditTestModal(edittestt,1,course.id,test)"><i class="bi bi-pencil-square mx-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2" (click)="deleteTest(test.id)"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                }
+                                            </table>
+                                            </ng-template>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div ngbAccordionItem class="my-1 shadow-sm">
+                                            <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
+                                            <p class="my-0 py-3 w-100" ngbAccordionToggle>Level 2</p>
+                                            </div>
+                                            <div ngbAccordionCollapse>
+                                            <div ngbAccordionBody>
+                                            <ng-template>
+                                            <button class="btn btn-sm btn-info" (click)="openSm(addtestt,2,course.id)">add</button>
+                                            <table class="table table-striped table-hover table-responsive mt-2">
+                                                <thead>
+                                                    <tr class="border-top">
+                                                        <th>question</th>
+                                                        <th>response</th>
+                                                    </tr>
+                                                </thead>
+                                                @for (test of filtertests(course.tests,2); track $index) {
+                                                <tbody>
+                                                    <tr>
+                                            
+                                                        <td>{{ test?.question }}</td>
+                                                        <td>{{ test?.response_correct }}</td>
+                                                        <td class="text-center">
+                                                            <button class="btn btn-sm m-0 p-0" (click)="openEditTestModal(edittestt,2,course.id,test)"><i class="bi bi-pencil-square mx-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2" (click)="deleteTest(test.id)"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                }
+                                            </table>
+                                            </ng-template>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div ngbAccordionItem class="my-1 shadow-sm">
+                                            <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
+                                            <p class="my-0 py-3 w-100" ngbAccordionToggle>Level 3</p>
+                                            </div>
+                                            <div ngbAccordionCollapse>
+                                            <div ngbAccordionBody>
+                                            <ng-template>
+                                            <button class="btn btn-sm btn-info" (click)="openSm(addtestt,3,course.id)">add</button>
+                                            <table class="table table-striped table-hover table-responsive mt-2">
+                                                <thead>
+                                                    <tr class="border-top">
+                                                        <th>question</th>
+                                                        <th>response</th>
+                                                    </tr>
+                                                </thead>
+                                                @for (test of filtertests(course.tests,3); track $index) {
+                                                <tbody>
+                                                    <tr>
+                                            
+                                                        <td>{{ test?.question }}</td>
+                                                        <td>{{ test?.response_correct }}</td>
+                                                        <td class="text-center">
+                                                            <button class="btn btn-sm m-0 p-0" (click)="openEditTestModal(edittestt,3,course.id,test)"><i class="bi bi-pencil-square mx-2"></i></button>
+                                                            <button class="btn btn-sm m-0 p-0"><i class="bi bi-trash3 ms-2" (click)="deleteTest(test.id)"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                }
+                                            </table>
+                                            </ng-template>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         </ng-template>
@@ -188,19 +334,176 @@
     </div>
 </div>
                         
-<!-- add chapter -->
+<!------------------------------------------------- add chapter ---------------------------------------------->
+
 <ng-template #addChapter let-modal>
     <div class="modal-header pb-0 pt-2">
         <h6 class="fw-bold">add course</h6>
         <button type="button" class="btn-close" style="width: 6px; height: 3px; margin-bottom: 3px;" aria-label="Close"
             (click)="modal.dismiss('Cross click')"></button>
     </div>
+    <form [formGroup]="NewChapter" (ngSubmit)="addChapterr()">
     <div class="modal-body">
-
+    <div class="row justify-content-between my-2">
+    <label class="col-4 col-form-label" for="title">title</label>
+    <div class="col-8">
+        <input class="form-control" type="text"  name="title" formControlName="title">
     </div>
-    <div class="modal-footer pb-1 pt-1">
-        <button type="button" class="btn btn-sm btn-secondary rounded-3"
-            (click)="modal.close('Close click')">Close</button>
+    </div>
+    <div class="row justify-content-between my-2">
+        <label class="col-4 col-form-label" for="lien">lien</label>
+        <div class="col-8">
+            <input class="form-control" type="text" name="lien" formControlName="lien">
+        </div>
+    </div>
+</div>
+<div class="modal-footer pb-1 pt-1">
+    <button type="button" class="btn btn-sm btn-secondary rounded-3"
+    (click)="modal.close('Close click')">Close</button>
         <button class="btn btn-sm btn-primary rounded-3" type="submit" value="Submit">Add</button>
     </div>
+</form>
+</ng-template>
+
+
+<!------------------------------------------------- edit chapter ---------------------------------------------->
+
+<ng-template #editChapterr let-modal>
+    <div class="modal-header pb-0 pt-2">
+        <h6 class="fw-bold">add course</h6>
+        <button type="button" class="btn-close" style="width: 6px; height: 3px; margin-bottom: 3px;" aria-label="Close"
+            (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <form [formGroup]="EditChapter" (ngSubmit)="editChapter()">
+        <div class="modal-body">
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="title">title</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="title" formControlName="title">
+                </div>
+            </div>
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="lien">lien</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="lien" formControlName="lien">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer pb-1 pt-1">
+            <button type="button" class="btn btn-sm btn-secondary rounded-3"
+                (click)="modal.close('Close click')">Close</button>
+            <button class="btn btn-sm btn-primary rounded-3" type="submit" value="Submit">Update</button>
+        </div>
+    </form>
+</ng-template>
+
+
+<!------------------------------------------------- add test ---------------------------------------------->
+
+<ng-template #addtestt let-modal>
+    <div class="modal-header pb-0 pt-2">
+        <h6 class="fw-bold">add course</h6>
+        <button type="button" class="btn-close" style="width: 6px; height: 3px; margin-bottom: 3px;" aria-label="Close"
+            (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <form [formGroup]="NewTest" (ngSubmit)="addTest()">
+        <div class="modal-body">
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="question">question</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="question" formControlName="question">
+                </div>
+            </div>
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="response_1">response 1</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="response_1" formControlName="response_1">
+                </div>
+            </div>
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="response_2">response 2</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="response_2" formControlName="response_2">
+                </div>
+            </div>
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="response_3">response 3</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="response_3" formControlName="response_3">
+                </div>
+            </div>
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="response_4">response 4</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="response_4" formControlName="response_4">
+                </div>
+            </div>
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="response_correct">response coreect</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="response_correct" formControlName="response_correct">
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer pb-1 pt-1">
+            <button type="button" class="btn btn-sm btn-secondary rounded-3"
+                (click)="modal.close('Close click')">Close</button>
+            <button class="btn btn-sm btn-primary rounded-3" type="submit" value="Submit">Add</button>
+        </div>
+    </form>
+</ng-template>
+
+<!------------------------------------------------- edit est ---------------------------------------------->
+<ng-template #edittestt let-modal>
+    <div class="modal-header pb-0 pt-2">
+        <h6 class="fw-bold">add course</h6>
+        <button type="button" class="btn-close" style="width: 6px; height: 3px; margin-bottom: 3px;" aria-label="Close"
+            (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <form [formGroup]="editTestForm" (ngSubmit)="editTest()">
+        <div class="modal-body">
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="question">question</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="question" formControlName="question">
+                </div>
+            </div>
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="response_1">response 1</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="response_1" formControlName="response_1">
+                </div>
+            </div>
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="response_2">response 2</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="response_2" formControlName="response_2">
+                </div>
+            </div>
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="response_3">response 3</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="response_3" formControlName="response_3">
+                </div>
+            </div>
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="response_4">response 4</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="response_4" formControlName="response_4">
+                </div>
+            </div>
+            <div class="row justify-content-between my-2">
+                <label class="col-4 col-form-label" for="response_correct">response coreect</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" name="response_correct" formControlName="response_correct">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer pb-1 pt-1">
+            <button type="button" class="btn btn-sm btn-secondary rounded-3"
+                (click)="modal.close('Close click')">Close</button>
+            <button class="btn btn-sm btn-primary rounded-3" type="submit" value="Submit">Update</button>
+        </div>
+    </form>
 </ng-template>

@@ -11,7 +11,7 @@ export class JwtInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    if (!request.url.includes('/auth') && !request.url.includes('/test')) {
+    if (!request.url.includes('/auth')) {
       let newRequest = request.clone({
         headers: request.headers.set(
           'Authorization',
