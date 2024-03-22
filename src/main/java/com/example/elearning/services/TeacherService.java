@@ -3,7 +3,7 @@ package com.example.elearning.services;
 import com.example.elearning.dto.ChapterDto;
 import com.example.elearning.dto.CourseDto;
 import com.example.elearning.dto.TestDto;
-import com.example.elearning.requests.TestRequest;
+import com.example.elearning.requests.NewTest;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ public interface TeacherService {
 
     void deleteChapter(int id);
 
-    TestDto addTest(TestRequest newTest);
+    TestDto addTest(NewTest newTest);
 
-    TestDto editTest(int id, TestRequest updatedTest);
+    TestDto editTest(int id, NewTest updatedTest);
 
     void deleteTest(int id);
 }

@@ -5,7 +5,7 @@ import com.example.elearning.dto.ChapterDto;
 import com.example.elearning.dto.CourseDto;
 import com.example.elearning.dto.TestDto;
 import com.example.elearning.entities.*;
-import com.example.elearning.requests.TestRequest;
+import com.example.elearning.requests.NewTest;
 import com.example.elearning.services.TeacherService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -87,7 +87,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public TestDto addTest(TestRequest newTest) {
+    public TestDto addTest(NewTest newTest) {
         Optional<Course> course = courseRepository.findById(newTest.getCourse_id());
         if (course.isEmpty()) throw new UsernameNotFoundException("Course with id  : "+newTest.getCourse_id()+" does not exist");
         Test test = new ModelMapper().map(newTest, Test.class);
@@ -96,7 +96,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public TestDto editTest(int id, TestRequest updatedTest) {
+    public TestDto editTest(int id, NewTest updatedTest) {
         Optional<Test> test = testRepository.findById(id);
         if (test.isEmpty()) throw new UsernameNotFoundException("Test with this id '" +id+ "' does not exist");
         test.get().setQuestion(updatedTest.getQuestion());

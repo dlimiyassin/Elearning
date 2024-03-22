@@ -4,7 +4,7 @@ import com.example.elearning.dto.ChapterDto;
 import com.example.elearning.dto.CourseDto;
 import com.example.elearning.dto.TestDto;
 import com.example.elearning.requests.NewChapter;
-import com.example.elearning.requests.TestRequest;
+import com.example.elearning.requests.NewTest;
 import com.example.elearning.responses.ChapterResponse;
 import com.example.elearning.responses.CourseResponse;
 import com.example.elearning.responses.TestResponse;
@@ -59,7 +59,7 @@ public class TeacherController {
     }
     /*****************************  test crud  ********************************/
     @PostMapping("/test")
-    public ResponseEntity<TestResponse> addTest(@RequestBody TestRequest newTest){
+    public ResponseEntity<TestResponse> addTest(@RequestBody NewTest newTest){
         TestDto testDto = teacherService.addTest(newTest);
         return new ResponseEntity<>(
                 new ModelMapper().map(testDto,TestResponse.class),
@@ -67,7 +67,7 @@ public class TeacherController {
     }
 
     @PutMapping("/test")
-    public ResponseEntity<TestResponse> editTest(@RequestBody TestRequest updatedTest, @RequestParam("id") int id){
+    public ResponseEntity<TestResponse> editTest(@RequestBody NewTest updatedTest, @RequestParam("id") int id){
         TestDto testDto = teacherService.editTest(id,updatedTest);
         return new ResponseEntity<>(
                 new ModelMapper().map(testDto,TestResponse.class),

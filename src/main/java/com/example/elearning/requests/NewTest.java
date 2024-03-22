@@ -1,6 +1,5 @@
 package com.example.elearning.requests;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TestRequest {
+public class NewTest {
      String question;
      String response_1;
      String response_2;
