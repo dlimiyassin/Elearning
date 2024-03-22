@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { StudentService } from '../../services/student.service';
 import { Module } from '../../models/module';
-import { filter, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { TokenService } from '../../services/token.service';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -27,34 +27,37 @@ export class StudentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private studentService: StudentService,
-    private router: Router,
     private token: TokenService,
     private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
     this.getCourse();
+    this.FollowRouteParam();
   }
 
+  @Input() id!: number;
+
   getCourse() {
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        switchMap(() => this.route.paramMap),
-        switchMap((params) => {
-          let courseId = Number(params.get('id'));
-          return this.studentService.getCourse(
-            courseId,
-            this.token.getInfos()?.sub as string
-          );
-        })
-      )
+    this.studentService
+      .getCourse(this.id, this.token.getInfos()?.sub as string)
       .subscribe((course) => {
         this.course = course;
-        console.log(course);
       });
   }
-  vedioURL(url : string){
+  FollowRouteParam() {
+  this.route.paramMap
+    .pipe(
+      switchMap((params) => {
+        const id = Number(params.get('id'));
+        return this.studentService.getCourse(id,this.token.getInfos()?.sub as string);
+      })
+    )
+    .subscribe((course) => {
+      this.course = course;
+    });
+  }
+  vedioURL(url: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }
