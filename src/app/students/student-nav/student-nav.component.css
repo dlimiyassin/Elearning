@@ -1,0 +1,43 @@
+.sidenav {
+    background: #ffffff;
+    position: fixed;
+    width: 17vw;
+    min-height: 100vh;
+    box-shadow: 0.043rem 0 0.5rem 0 #8690a3;
+}
+
+.item {
+    background-color: #ffffff;
+    color: black;
+    font-size: small;
+    font-weight: 600;
+    padding: 15px;
+}
+
+.rounded-circle {
+    height: 20vh;
+    width: 10vw;
+}
+
+.badge {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.sign-out {
+
+    background-color: #ffffff;
+    color: black;
+    font-size: small;
+    font-weight: 600;
+    border: none;
+}
+
+.activebutton {
+    box-shadow: inset 0 1px 0 0 #dcecfb;
+    background: rgb(118, 218, 255);
+    border: 1px solid #84bbf3;
+    color: #000000;
+    text-shadow: 0 1px 0 #528ecc;
+}

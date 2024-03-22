@@ -1,12 +1,60 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { StudentService } from '../../services/student.service';
+import { Module } from '../../models/module';
+import { filter, switchMap } from 'rxjs/operators';
+import { TokenService } from '../../services/token.service';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-student',
   standalone: true,
-  imports: [],
+  imports: [NgbAccordionModule],
   templateUrl: './student.component.html',
-  styleUrl: './student.component.css'
+  styleUrls: ['./student.component.css'],
 })
-export class StudentComponent {
+export class StudentComponent implements OnInit {
+  course: Module = {
+    userId: 0,
+    courseId: 0,
+    title: '',
+    level: 0,
+    chapters: [],
+    tests: [],
+  };
 
+  constructor(
+    private route: ActivatedRoute,
+    private studentService: StudentService,
+    private router: Router,
+    private token: TokenService,
+    private sanitizer: DomSanitizer
+  ) {}
+
+  ngOnInit(): void {
+    this.getCourse();
+  }
+
+  getCourse() {
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        switchMap(() => this.route.paramMap),
+        switchMap((params) => {
+          let courseId = Number(params.get('id'));
+          return this.studentService.getCourse(
+            courseId,
+            this.token.getInfos()?.sub as string
+          );
+        })
+      )
+      .subscribe((course) => {
+        this.course = course;
+        console.log(course);
+      });
+  }
+  vedioURL(url : string){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 }

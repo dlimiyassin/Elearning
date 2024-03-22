@@ -9,6 +9,7 @@ import { TeachersComponent } from './admins/teachers/teachers.component';
 import { StudentsComponent } from './admins/students/students.component';
 import { CoursesComponent } from './admins/courses/courses.component';
 import { AdminDashComponent } from './admins/admin-dash/admin-dash.component';
+import { StudentDashComponent } from './students/student-dash/student-dash.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Home' },
@@ -24,7 +25,11 @@ export const routes: Routes = [
       { path: 'courses', component: CoursesComponent, title: 'Admin' },
     ],
   },
-  { path: 'teacher', component: TeacherComponent, title: 'Dashboard' },
-  { path: 'student', component: StudentComponent, title: 'Dashboard' },
-];
+  { path: 'teacher', component: TeacherComponent, title: 'Teacher' },
 
+  { path: 'student', component: StudentDashComponent, 
+    children: [
+      { path: 'course/:id', component: StudentComponent, title: 'Student' },
+    ] 
+},
+];

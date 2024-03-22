@@ -1,0 +1,19 @@
+.navv {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0.043rem 0 0.5rem 0 #8690a3;
+    padding: fixed;
+}
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 72vh;
+    padding-bottom: 5%;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 50;
+    width: 100%;
+    height: 100%;
+}

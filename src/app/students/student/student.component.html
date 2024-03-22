@@ -1,1 +1,43 @@
-<p>student works!</p>
+
+<!------------------------------------------------- header ---------------------------------------------->
+
+@if (course.level == 0) {
+<nav class="navv">
+    <div class="text-center fw-bolder py-2">Introduction</div>
+</nav>
+} @else {
+<nav class="navv">
+    <div class="text-center fw-bolder py-2">Level : {{ course.level }}</div>
+</nav>
+}
+
+<!------------------------------------------------- Content ---------------------------------------------->
+
+<div class="container-fluid mt-3 px-5">
+            <div ngbAccordion [closeOthers]="true">
+                @for (chapter of course.chapters; track $index) {
+                    <div ngbAccordionItem class="my-1 shadow-sm mx-5">
+                        <div ngbAccordionHeader class="accordion-button custom-header justify-content-between py-0">
+                            <p class="my-0 py-3 w-100" ngbAccordionToggle>{{ chapter.title }}</p>
+                        </div>
+                        <div ngbAccordionCollapse>
+                            <div ngbAccordionBody>
+                                <ng-template>
+                                        <div class="video-container">
+                                            <iframe 
+                                            [src]='vedioURL(chapter.lien)'
+                                            frameborder="0"
+                                            class="rounded-3"
+                                            allowfullscreen></iframe>
+                                        </div>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                }@empty {
+                    <div class="alert alert-info text-center">
+                        There is no course uploaded yet
+                    </div>
+                }
+            </div>
+</div>

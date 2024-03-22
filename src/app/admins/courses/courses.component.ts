@@ -62,6 +62,7 @@ export class CoursesComponent {
     this.getStudents();
     this.getTeachers();
     this.getCourses();
+    
   }
 
   getTeachers() {
@@ -99,6 +100,7 @@ export class CoursesComponent {
       .subscribe({
         next: (courses) => {
           this.courses = courses;
+          console.log(this.courses);
         },
         error: (err) => {
           console.log(err);
