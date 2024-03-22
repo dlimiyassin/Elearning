@@ -29,12 +29,21 @@ public class TeacherController {
 
 
     /*****************************  chapter crud  ********************************/
+
+
     @GetMapping
     public ResponseEntity<List<CourseResponse>> getCourses(@RequestParam("email") String email) {
         List<CourseDto> courseList = teacherService.getCourses(email);
         Type listType = new TypeToken<List<CourseResponse>>() {}.getType();
         List<CourseResponse> coursesResponse = new ModelMapper().map(courseList, listType);
         return new ResponseEntity<>(coursesResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/course")
+    public ResponseEntity<CourseResponse> getCourse(@RequestParam("id") int id) {
+        CourseDto course = teacherService.getCourse(id);
+        CourseResponse courseResponse = new ModelMapper().map(course, CourseResponse.class);
+        return new ResponseEntity<>(courseResponse, HttpStatus.OK);
     }
 
     @PostMapping

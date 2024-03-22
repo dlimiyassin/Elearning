@@ -20,4 +20,6 @@ public interface TeacherService {
     TestDto editTest(int id, NewTest updatedTest);
 
     void deleteTest(int id);
+
+    CourseDto getCourse(int id);
 }

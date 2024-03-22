@@ -60,6 +60,13 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public CourseDto getCourse(int id) {
+        Optional<Course> course = courseRepository.findById(id);
+        if (course.isEmpty()) throw new UsernameNotFoundException("this provided course_id does not exist");
+        return new ModelMapper().map(course.get(), CourseDto.class);
+    }
+
+    @Override
     public ChapterDto addChapter(ChapterDto chapterDto) {
         Optional<Course> course = courseRepository.findById(chapterDto.getCourse_id());
         if (course.isEmpty()) throw new UsernameNotFoundException("this provided course_id does not exist");
@@ -114,6 +121,8 @@ public class TeacherServiceImpl implements TeacherService {
         if (test.isEmpty()) throw new UsernameNotFoundException("Test with this id '" +id+ "' does not exist");
         testRepository.deleteById(id);
     }
+
+
 
 
 }
