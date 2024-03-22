@@ -1,0 +1,32 @@
+<!------------------------------------------------- sidebar ---------------------------------------------->
+
+<nav class="sidenav">
+    <div class="text-center mt-3">
+        <img class="rounded-circle img-thumbnail" src="../../assets/imgs/profile picture copy.jpg" alt="admin">
+    </div>
+    <div class="badge d-block text-center mt-2">Teacher</div>
+    <ul class="list-group list-group-flush mt-3">
+        @for (course of courses; track $index) {
+        <button class="item list-group-item list-group-item-action border" routerLink="/teacher/course/{{course.id}}"
+            routerLinkActive="activebutton">
+            {{course.title}}
+        </button>
+        }
+    </ul>
+    <button class="sign-out position-absolute bottom-0 start-50 translate-middle mb-4" (click)="signOut()"><i
+            class="bi bi-box-arrow-left me-2"></i>Sign Out</button>
+</nav>
+<!--
+
+    <nav class="sidenav">
+        <div class="text-center mt-3">
+            <img class="rounded-circle img-thumbnail" src="../../../assets/imgs/profile picture copy.jpg" alt="admin">
+        </div>
+        <div class="badge d-block text-center mt-2">Teacher</div>
+        <ul class="list-group list-group-flush mt-3">
+            <button class="item list-group-item list-group-item-action border">Courses</button>
+        </ul>
+        <button class="sign-out position-absolute bottom-0 start-50 translate-middle mb-4" (click)="signOut()"><i
+                class="bi bi-box-arrow-left me-2"></i>Sign Out</button>
+    </nav>
+-->

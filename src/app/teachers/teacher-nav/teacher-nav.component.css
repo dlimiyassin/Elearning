@@ -1,4 +1,10 @@
-
+.sidenav {
+    background: #ffffff;
+    position: fixed;
+    width: 17vw;
+    min-height: 100vh;
+    box-shadow: 0.043rem 0 0.5rem 0 #8690a3;
+}
 
 .item {
     background-color: #ffffff;
@@ -27,25 +33,11 @@
     font-weight: 600;
     border: none;
 }
-.navv {
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0.043rem 0 0.5rem 0 #8690a3;
-    padding: fixed;
-}
 
-
-th {
-    font-size: small;
+.activebutton {
+    box-shadow: inset 0 1px 0 0 #dcecfb;
+    background: rgb(118, 218, 255);
+    border: 1px solid #84bbf3;
+    color: #000000;
+    text-shadow: 0 1px 0 #528ecc;
 }
-
-td {
-    font-size: small;
-}
-.bi-trash3 {
-    color: red;
-}
-
-.bi-pencil-square {
-    color: green;
-}
-

@@ -18,6 +18,12 @@ export class TeacherService {
     return this.http.get<Course[]>(url);
   }
 
+  /****************************** course ********************************/
+
+  public getCourse(id: number): Observable<Course> {
+    const url = this.Api + `/teacher/course?id=${id}`;
+    return this.http.get<Course>(url);
+  }
   /****************************** chapters ********************************/
 
   /********* POST **********/

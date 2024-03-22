@@ -1,5 +1,5 @@
-import { Component, OnInit, TemplateRef, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit, TemplateRef, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from '../../services/token.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -8,7 +8,7 @@ import { TeacherService } from '../../services/teacher.service';
 import { Course } from '../../models/course';
 import { Chapter } from '../../models/chapter';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, switchMap, takeUntil } from 'rxjs';
 import { Test } from '../../models/test';
 @Component({
   selector: 'app-teacher',
@@ -18,34 +18,61 @@ import { Test } from '../../models/test';
   styleUrl: './teacher.component.css',
 })
 export class TeacherComponent implements OnInit {
+  #route = inject(ActivatedRoute);
   #teacher = inject(TeacherService);
   #router = inject(Router);
   #token = inject(TokenService);
   #toaster = inject(ToastrService);
   #modalService = inject(NgbModal);
+
   ngOnInit(): void {
-    this.getCourses();
+    this.getCourse();
+    this.FollowRouteParam();
   }
-  courses: Course[] = [];
+
+  course: Course = {
+    id: 0,
+    title: '',
+    users: [],
+    chapters: [],
+    tests: [],
+  };
   chapters: Chapter[] = [];
   tests: Test[] = [];
 
-  /****************************** get courses ********************************/
+  @Input() id!: number;
 
-  getCourses() {
+  /****************************** detect path parameter changes ********************************/
+
+  FollowRouteParam() {
+    this.#route.paramMap
+      .pipe(
+        switchMap((params) => {
+          const id = Number(params.get('id'));
+          return this.#teacher.getCourse(id);
+        })
+      )
+      .subscribe((course) => {
+        this.course = course;
+      });
+  }
+
+  /****************************** get course ********************************/
+
+  getCourse() {
     this.#teacher
-      .getCourses((this.#token.getInfos() as any).sub)
+      .getCourse(this.id)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (data: Course[]) => {
-          this.courses = data;
-          console.log(data);
+        next: (data) => {
+          this.course = data;
         },
         error: (err) => {
           console.log(err);
         },
       });
   }
+
   filterchapters(chapters: Chapter[], level: number): Chapter[] {
     return chapters.filter((chapter) => chapter.level === level);
   }
@@ -72,7 +99,7 @@ export class TeacherComponent implements OnInit {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (data) => {
-          this.getCourses();
+          this.getCourse();
           this.#modalService.dismissAll();
           this.NewChapter.reset();
           this.#toaster.success('Chapter added seccussfully', 'New Record');
@@ -103,7 +130,7 @@ export class TeacherComponent implements OnInit {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (data) => {
-          this.getCourses();
+          this.getCourse();
           this.#modalService.dismissAll();
           this.EditChapter.reset();
           this.#toaster.success('Chapter edited seccussfully', 'Record Edited');
@@ -123,7 +150,7 @@ export class TeacherComponent implements OnInit {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: () => {
-          this.getCourses();
+          this.getCourse();
           this.#toaster.warning(
             'Chapter deleted seccussfully',
             'Record Deleted'
@@ -160,7 +187,7 @@ export class TeacherComponent implements OnInit {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (data) => {
-          this.getCourses();
+          this.getCourse();
           this.#modalService.dismissAll();
           this.NewTest.reset();
           this.#toaster.success('Test added seccussfully', 'New Record');
@@ -181,24 +208,25 @@ export class TeacherComponent implements OnInit {
     response_4: new FormControl(''),
     response_correct: new FormControl(''),
   });
-  test_id! : number;
+  test_id!: number;
   editTest() {
-        const test = {
+    const test = {
       question: this.editTestForm.get('question')?.value as string,
       response_1: this.editTestForm.get('response_1')?.value as string,
       response_2: this.editTestForm.get('response_2')?.value as string,
       response_3: this.editTestForm.get('response_3')?.value as string,
       response_4: this.editTestForm.get('response_4')?.value as string,
-      response_correct: this.editTestForm.get('response_correct')?.value as string,
+      response_correct: this.editTestForm.get('response_correct')
+        ?.value as string,
       level: this.level,
       course_id: this.course_id,
     };
-        this.#teacher
-      .editTest(test,this.test_id)
+    this.#teacher
+      .editTest(test, this.test_id)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (data) => {
-          this.getCourses();
+          this.getCourse();
           this.#modalService.dismissAll();
           this.editTestForm.reset();
           this.#toaster.success('Test edited seccussfully', 'Record Edited');
@@ -213,21 +241,18 @@ export class TeacherComponent implements OnInit {
   /****************************** delete test ********************************/
 
   deleteTest(id: number) {
-        this.#teacher
-          .deleteTest(id)
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe({
-            next: () => {
-              this.getCourses();
-              this.#toaster.warning(
-                'Test deleted seccussfully',
-                'Record Deleted'
-              );
-            },
-            error: (err) => {
-              console.log(err);
-            },
-          });
+    this.#teacher
+      .deleteTest(id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: () => {
+          this.getCourse();
+          this.#toaster.warning('Test deleted seccussfully', 'Record Deleted');
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
   /****************************** modals ********************************/
 
@@ -267,7 +292,7 @@ export class TeacherComponent implements OnInit {
       response_2: test.response_2,
       response_3: test.response_3,
       response_4: test.response_4,
-      response_correct: test.response_correct
+      response_correct: test.response_correct,
     });
   }
 
