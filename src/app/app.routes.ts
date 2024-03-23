@@ -11,6 +11,7 @@ import { CoursesComponent } from './admins/courses/courses.component';
 import { AdminDashComponent } from './admins/admin-dash/admin-dash.component';
 import { StudentDashComponent } from './students/student-dash/student-dash.component';
 import { TeacherDashComponent } from './teachers/teacher-dash/teacher-dash.component';
+import { StudentTestComponent } from './students/student-test/student-test.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Home' },
@@ -35,6 +36,8 @@ export const routes: Routes = [
   { path: 'student', component: StudentDashComponent, 
     children: [
       { path: 'course/:id', component: StudentComponent, title: 'Student' },
+      { path: 'test/:id', component: StudentTestComponent, title: 'Student' },
+
     ] 
 },
 ];

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, input } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { StudentService } from '../../services/student.service';
 import { Module } from '../../models/module';
 import { switchMap } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-student',
   standalone: true,
-  imports: [NgbAccordionModule],
+  imports: [NgbAccordionModule, RouterModule],
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.css'],
 })
@@ -46,16 +46,19 @@ export class StudentComponent implements OnInit {
       });
   }
   FollowRouteParam() {
-  this.route.paramMap
-    .pipe(
-      switchMap((params) => {
-        const id = Number(params.get('id'));
-        return this.studentService.getCourse(id,this.token.getInfos()?.sub as string);
-      })
-    )
-    .subscribe((course) => {
-      this.course = course;
-    });
+    this.route.paramMap
+      .pipe(
+        switchMap((params) => {
+          const id = Number(params.get('id'));
+          return this.studentService.getCourse(
+            id,
+            this.token.getInfos()?.sub as string
+          );
+        })
+      )
+      .subscribe((course) => {
+        this.course = course;
+      });
   }
   vedioURL(url: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);

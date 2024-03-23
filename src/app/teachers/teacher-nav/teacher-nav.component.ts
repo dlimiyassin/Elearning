@@ -36,6 +36,8 @@ export class TeacherNavComponent implements OnInit {
       .subscribe({
         next: (data: Course[]) => {
           this.courses = data;
+          console.log(data);
+          
         },
         error: (err) => {
           console.log(err);

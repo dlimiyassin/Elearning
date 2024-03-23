@@ -1,0 +1,41 @@
+<!------------------------------------------------- header ---------------------------------------------->
+
+@if (course.level == 0) {
+<nav class="navv">
+    <div class="text-center fw-bolder py-2">Introduction</div>
+</nav>
+} @else {
+<nav class="navv">
+    <div class="text-center fw-bolder py-2">Level : {{ course.level }}</div>
+</nav>
+}
+
+<!------------------------------------------------- Content ---------------------------------------------->
+<div class="text-center mt-3">
+            <div class="row">
+            <div class="col-8 mx-auto">
+                @for (quiz of course.tests; track $index) {
+                <div class="card shadow mt-3" >
+
+                        <div class="card-header fw-bold text-center bg-info">Question {{ $index + 1 }}/{{ course.tests.length }}</div>
+                        <div class="card-body ms-3">
+                            <div>
+                                <p class="text-center">{{ quiz.question }}</p>
+                            </div>
+                            <hr />
+                            @for (option of [quiz.response_1, quiz.response_2, quiz.response_3, quiz.response_4]; track $index) {
+                            <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" [name]="'radio' + quiz.id" [id]="'radio' + $index"
+                                        (change)="onOptionSelected(quiz.id, option)" />
+                                    <label class="form-check-label ms-1" [for]="'radio' + $index">{{ option }}</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                <div class="mt-5">
+                    <button class="btn btn-info btn-xxl w-100" (click)="submitAnswers()">Submit Answers</button>
+                </div>
+            </div>
+        </div>
+</div>

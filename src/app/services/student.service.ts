@@ -29,7 +29,17 @@ export class StudentService {
   /****************************** course ********************************/
 
   public getCourse(courseId: number, email: string): Observable<Module> {
-    const url = this.Api + `/student/course?courseId=${courseId}&email=${email}`;
+    const url =
+      this.Api + `/student/course?courseId=${courseId}&email=${email}`;
     return this.http.get<Module>(url);
+  }
+
+  submitAnswers(
+    submittedAnswers: { questionId: number; selectedOption: string }[],
+    courseId: number,
+     userId: number ) : Observable<number>{
+      
+    const url = this.Api + `/student?courseId=${courseId}&userId=${userId}`;
+    return this.http.post<number>(url, submittedAnswers);
   }
 }
