@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +57,7 @@ public class TeacherServiceImpl implements TeacherService {
 
             courseDtos.add(courseDto);
         }
+        courseDtos.sort(Comparator.comparing(CourseDto::getId));
         return courseDtos;
     }
 

@@ -2,6 +2,7 @@ package com.example.elearning.controllers;
 
 import com.example.elearning.dto.CourseDto;
 import com.example.elearning.dto.StudentDto;
+import com.example.elearning.requests.QuizRequest;
 import com.example.elearning.responses.CourseResponse;
 import com.example.elearning.responses.StudentResponse;
 import com.example.elearning.services.StudentService;
@@ -10,10 +11,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -37,5 +35,12 @@ public class StudentController {
         StudentDto course = studentService.getCourse(email,courseId);
         StudentResponse coursesResponse = new ModelMapper().map(course, StudentResponse.class);
         return new ResponseEntity<>(coursesResponse, HttpStatus.OK);
+    }
+    @PostMapping
+    public ResponseEntity<Object> sendQuiz(@RequestBody List<QuizRequest> answers,
+                                           @RequestParam("courseId") int courseId,
+                                           @RequestParam("userId") int userId){
+        int response = studentService.sendQuiz(answers,courseId,userId);
+        return new ResponseEntity<>(response ,HttpStatus.ACCEPTED);
     }
 }

@@ -6,6 +6,7 @@ import com.example.elearning.dto.CourseDto;
 import com.example.elearning.dto.StudentDto;
 import com.example.elearning.dto.TestDto;
 import com.example.elearning.entities.*;
+import com.example.elearning.requests.QuizRequest;
 import com.example.elearning.services.StudentService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +55,7 @@ public class StudentServiceImpl implements StudentService {
 
             courseDtos.add(courseDto);
         }
+        courseDtos.sort(Comparator.comparing(CourseDto::getId));
         return courseDtos;
     }
 
@@ -61,7 +64,7 @@ public class StudentServiceImpl implements StudentService {
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) throw new UsernameNotFoundException("User with this email : '"+email+"' does not exist");
 
-        Optional<CourseUser> courseUser = courseUserRepository.findCourse(user.get().getId(),courseId);
+        Optional<CourseUser> courseUser = courseUserRepository.findMatch(user.get().getId(),courseId);
         if (courseUser.isEmpty()) throw new UsernameNotFoundException("there is no link between user n : "+user.get().getId()+ " and course n :"+ courseId);
 
         Optional<Course> courseEntity = courseRepository.findById(courseId);
@@ -82,5 +85,36 @@ public class StudentServiceImpl implements StudentService {
         studentDto.setChapters(chapterDtos);
         studentDto.setTests(testDtos);
         return studentDto;
+    }
+
+    @Override
+    public int sendQuiz(List<QuizRequest> answers, int courseId, int userId) {
+        Optional<CourseUser> courseUser = courseUserRepository.findMatch(userId,courseId);
+        if (courseUser.isEmpty()) throw new UsernameNotFoundException("there is no link between user n : "+userId+ " and course n :"+ courseId);
+        int score=0;
+        int correctAnswers=0;
+        int totalQuestions = testRepository.findTests(courseId,courseUser.get().getLevel()).size();
+        for (QuizRequest answer:answers){
+            Test test = testRepository.findTest(answer.getQuestionId());
+            if (answer.getSelectedOption().equals(test.getResponse_correct())){
+                correctAnswers++;
+            }
+        }
+        score= (correctAnswers * 20) / totalQuestions;
+        
+        if (courseUser.get().getLevel() == 0){
+            if (score < 8) {
+                courseUser.get().setLevel(1);
+            } else if (score < 14) {
+                courseUser.get().setLevel(2);
+            } else {
+                courseUser.get().setLevel(3);
+            }
+        }else if (courseUser.get().getLevel() == 1 || courseUser.get().getLevel() == 2){
+            int level = courseUser.get().getLevel();
+            courseUser.get().setLevel(level+1);
+        }
+        courseUserRepository.save(courseUser.get());
+        return score;
     }
 }

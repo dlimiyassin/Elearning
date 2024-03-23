@@ -15,7 +15,4 @@ public interface CourseUserRepository extends JpaRepository<CourseUser, Integer>
 
     @Query(nativeQuery = true, value = "SELECT * FROM course_user C WHERE C.user_id = ?1")
     Optional<List<CourseUser>> findCourses(int userId);
-
-    @Query(nativeQuery = true, value = "SELECT * FROM course_user C WHERE C.user_id = ?1 AND C.course_id = ?2")
-    Optional<CourseUser> findCourse(int userId, int courseId);
 }

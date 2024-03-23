@@ -9,4 +9,6 @@ import java.util.List;
 public interface TestRepository extends JpaRepository<Test, Integer> {
     @Query(nativeQuery = true, value = "SELECT * FROM test C WHERE C.course_id = ?1 AND C.level = ?2")
     List<Test> findTests(int courseId, int level);
+    @Query(nativeQuery = true, value = "SELECT * FROM test C WHERE C.id = ?1")
+    Test findTest(int id);
 }
